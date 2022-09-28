@@ -1,0 +1,47 @@
+{
+  "tipo_iten": {
+    "itens": [
+      {
+        "id": 1,
+        "tipo": "Camisetas"
+      },
+      {
+        "id": 2,
+        "tipo": "Canecas"
+      },
+      {
+        "id": 3,
+        "tipo": "Canetas"
+      },
+      {
+        "id": 4,
+        "tipo": "Moleton"
+      },
+      {
+        "id": 5,
+        "tipo": "Capa de Celular"
+      }
+    ]
+  },
+  "status": [
+    {
+      "id": 1,
+      "tipo": "Realizado"
+    },
+    {
+      "id": 2,
+      "tipo": "Confirmado"
+    },
+    {
+      "id": 3,
+      "tipo": "Em Confecção"
+    },
+    {
+      "id": 4,
+      "tipo": "Finalizado"
+    }
+  ],
+  "pedidos": [
+
+  ]
+}
