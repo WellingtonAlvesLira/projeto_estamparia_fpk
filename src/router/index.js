@@ -7,16 +7,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'lista',
+    path: '/lista',
+    name: 'listPedido',
     component: listarPedido
   },
 
-  {
-    path: '/lista',
-    name: 'lista',
-    component: listarPedido
-  },
   {
     path: '/editar/:id',
     name: 'editar',

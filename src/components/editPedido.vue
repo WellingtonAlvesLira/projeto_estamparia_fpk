@@ -80,6 +80,8 @@ export default {
   },
   created() {
     this.getUser();
+    this.listarPedidos();
+
   },
   methods: {
     getUser() {
@@ -88,6 +90,8 @@ export default {
         this.iten = response.data.iten;
         this.qtd = response.data.qtd;
         this.statusP = response.data.statusP;
+        this.data_atual = response.data.data_atual;
+
       });
     },
 
@@ -96,11 +100,14 @@ export default {
         nome: this.nome,
         iten: this.iten,
         qtd: this.qtd,
+        statusP:  this.statusP,
+        data_atual: this.data_atual
       };
       this.put(`/pedidos/${this.$route.params.id}`, data_pedido).then(
         (response) => {
           alert('Pedido atualizado com sucesso!')
-          this.$router.push('/lista')
+          this.listarPedidos()
+          this.$router.push('/lista');
           console.log(response);
         }
       );
@@ -112,7 +119,14 @@ export default {
         alert('Pedido deletado com sucesso!')
         this.$router.push('/lista')
       })
-    }
+    },
+
+    
+    listarPedidos() {
+      this.get("/pedidos").then((resposta) => {
+        this.pedidos = resposta.data;
+      });
+    },
   },
 };
 </script>

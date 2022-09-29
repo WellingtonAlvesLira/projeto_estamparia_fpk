@@ -84,9 +84,8 @@
     </div>
     <!--FIM MODAL CADASTRAR PEDIDO-->
 
-    <h1 class="mt-4">Lista de Pedidos</h1>
-    <h2 style="color: blue">Estamparia WASL</h2>
-    <table class="table t_list_pedidos">
+    <h2 class="mt-4 ">Lista de Pedidos</h2>
+    <table class="table t_list_pedidos mt-3">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -94,6 +93,8 @@
           <th scope="col">ITEN</th>
           <th scope="col">QUANTIDADE</th>
           <th scope="col">STATUS</th>
+          <th scope="col">DATA PEDIDO</th>
+          <th scope="col">DATA ENTREGA</th>
           <th scope="col">AÇÕES</th>
         </tr>
       </thead>
@@ -104,6 +105,8 @@
           <td>{{ p.iten }}</td>
           <td>{{ p.qtd }}</td>
           <td>{{ p.statusP }}</td>
+          <td>{{p.data_atual}}</td>
+          <td>{{p.data_prevista}}</td>
           <td>
             <router-link :to="{ name: 'editar', params: { id: p.id } }">
               <button
@@ -115,7 +118,7 @@
               </button>
             </router-link>
             <label style="margin: 10px; " for="status" id="text-opc">Status</label>
-            <select @click="atualizarStatus(s.id)" v-model="statusPut">
+            <select @click="atualizarStatus" v-model="statusPut">
               <option v-for="(s, i) in status" :key="i">
                 {{ s.tipo }}
               </option>
@@ -148,16 +151,16 @@ export default {
       status: [],
       pedidos: [],
 
-      numberPedido: "",
-      msg: "",
       statusPut: "",
+      
 
       data_pedido: {
         nome: "",
         iten: "",
         qtd: "",
-        statusP: "Realizado",
         data_atual: new Date(),
+        statusP: "Realizado",
+       
       },
     };
   },
@@ -168,9 +171,11 @@ export default {
     this.listarStatus();
     this.listarPedidos();
   },
+  
 
   methods: {
     registrarPedidos(e) {
+
       e.preventDefault();
       //Validação de dados
       if (this.data_pedido.nome == "" || this.data_pedido.iten == "") {
@@ -180,6 +185,8 @@ export default {
         this.post("/pedidos/", this.data_pedido).then((resposta) => {
           if (resposta.data) {
             alert('Pedido salvo com sucesso');
+            //limpar form
+            this.data_pedido = "";
             this.listarPedidos();           
           }
         });
@@ -187,20 +194,18 @@ export default {
     },
     
     atualizarStatus(){
-      alert('teste')
+      console.log('Primeira oportunidade que tive de trabalhar com dados assim.')
     },
     //Listando dados do backend para a aplicação
     listarItens() {
       this.get("/tipo_iten").then((resposta) => {
         this.itens = resposta.data.itens;
-        console.log(this.itens);
       });
     },
 
     listarStatus() {
       this.get("/status").then((resposta) => {
         this.status = resposta.data;
-        console.log(this.status);
       });
     },
 
@@ -213,7 +218,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .t_list_pedidos{
   width: 80%;
   margin: auto;
