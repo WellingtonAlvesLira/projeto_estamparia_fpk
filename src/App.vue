@@ -9,7 +9,8 @@
   import navBarVue from './components/navBar.vue';
   export default {
     components:{
-      navBarVue
+      navBarVue,
+      
     }
 
   }

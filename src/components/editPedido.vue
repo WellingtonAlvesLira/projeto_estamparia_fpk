@@ -96,6 +96,7 @@ export default {
     },
 
     updatePedido() {
+      //Realizando o get dos pedidos atuais , para realizar uma nova atualização.
       var data_pedido = {
         nome: this.nome,
         iten: this.iten,
@@ -107,18 +108,23 @@ export default {
         (response) => {
           alert('Pedido atualizado com sucesso!')
           this.listarPedidos()
-          this.$router.push('/lista');
+          this.$router.push('/');
           console.log(response);
         }
       );
     },
 
     deletarPedido(){
-      this.delete(`/pedidos/${this.$route.params.id}`).then((response)=>{
+      var retorno = confirm("Tem certeza ?");
+        if(retorno == true){
+          this.delete(`/pedidos/${this.$route.params.id}`).then((response)=>{
         console.log(response);
-        alert('Pedido deletado com sucesso!')
-        this.$router.push('/lista')
+
+        
       })
+          alert('Pedido deletado com sucesso!')
+          this.$router.push('/lista')
+        }
     },
 
     
