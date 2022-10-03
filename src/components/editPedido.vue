@@ -115,8 +115,8 @@ export default {
     },
 
     deletarPedido(){
-      var retorno = confirm("Tem certeza ?");
-        if(retorno == true){
+      var Yes = confirm("Tem certeza ?");
+        if(Yes == true){
           this.delete(`/pedidos/${this.$route.params.id}`).then((response)=>{
         console.log(response);
 
